@@ -44,13 +44,13 @@ resource "aws_cloudwatch_event_rule" "opens_morning_bst" {
   schedule_expression = "cron(01 7 ? * MON-FRI *)"
 }
 
-resource "aws_cloudwatch_event_target" "closes_night" {
+resource "aws_cloudwatch_event_target" "opens_morning_bst" {
   rule      = aws_cloudwatch_event_rule.opens_morning_bst.name
   target_id = "lambda"
   arn       = aws_lambda_function.out_of_hours_shutdown.arn
 }
 
-resource "aws_lambda_permission" "allow_cloudwatch_to_call_closes_night" {
+resource "aws_lambda_permission" "allow_cloudwatch_to_call_opens_morning_bst" {
   statement_id  = "AllowExecutionFromCloudWatch"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.out_of_hours_shutdown.function_name
