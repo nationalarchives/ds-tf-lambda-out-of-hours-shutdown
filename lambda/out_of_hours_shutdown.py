@@ -3,7 +3,7 @@ from DST_handler import london_time_now
 
 
 def lambda_handler(event, context):
-    region = 'eu-west-1'
+    region = 'eu-west-2'
     ec2 = boto3.client('ec2', region_name=region)
     asclient = boto3.client('autoscaling', region_name=region)
 
