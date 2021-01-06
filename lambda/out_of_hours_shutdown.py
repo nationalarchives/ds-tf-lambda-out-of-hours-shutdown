@@ -6,7 +6,7 @@ def lambda_handler(event, context):
     region = 'eu-west-1'
     ec2 = boto3.client('ec2', region_name=region)
     asclient = boto3.client('autoscaling', region_name=region)
-    
+
     ec2_instanceIds_to_shutdown = list()
     asgs_to_suspend = dict()
 
@@ -17,7 +17,7 @@ def lambda_handler(event, context):
             shut_down = True
             asg_groupname = ""
             if "Tags" not in instance.keys():
-                print("ERROR: Instance has no tags:" + instance['InstanceId'])
+                print("ERROR: Instance has no tags: " + instance['InstanceId'])
                 continue
             for tag in instance['Tags']:
                 if tag["Key"] == "aws:autoscaling:groupName":
@@ -38,7 +38,7 @@ def lambda_handler(event, context):
 
     # for instance in all_rds_instances["DBInstances"]:
     #     rds_instances.append(instance["DBInstanceIdentifier"])
-    #
+
     # for instance in all_rds_instances["DBInstances"]:
     #     arn = rds.list_tags_for_resource(ResourceName=instance["DBInstanceArn"])
     #     for pair in arn["TagList"]:
